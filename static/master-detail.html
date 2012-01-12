@@ -24,17 +24,26 @@
 
 			function setup(uri) {
 				var parts = getParts(uri);
+				console.log(parts);
 				var ns = parts.ns, id = parts.id;
 				includeHelper(ns);
 				if (ns !== undefined) {
-					$.getJSON('../data/' + ns + '/all.js', function(data) {
-						// alert(data);
-					});
-				}
-				if (id !== undefined) {
-					$.getJSON('../data/' + ns + '/' + id + '.js', function(data) {
-						var om = window[ns]['Model'](data);
-						// bind(om);
+					var all_uri = '../data/' + ns + '/all.js';
+					console.log('Loading all: %s', all_uri);
+					$.getJSON(all_uri, function(data) {
+						window[ns].loadViewModel(data);
+						console.log(window[ns].ViewModel);
+						if (id !== undefined) {
+							var id_uri = '../data/' + ns + '/' + id + '.js';
+							$.getJSON(id_uri, function(data) {
+								window[ns].loadModel(data);
+								console.log(window[ns].ViewModel);
+								ko.applyBindings(window[ns].ViewModel);
+							});
+						} else {
+							ko.applyBindings(window[ns].ViewModel);
+						}
+
 					});
 				}
 			}
@@ -52,9 +61,9 @@
 		<a href="index.html">Back</a>	
 		<a href="javascript:testBind()">Bind</a>
 		<div class="single">
-			Id : <span data-bind="text: id"></span><br/>
-			Name:<input id="name" type="text" data-bind="value: name"/><br/>
-			Url:<input id="url" type="text" data-bind="value: url" /><br/>
+			Id : <span data-bind="text: active.id"></span><br/>
+			Name:<input id="name" type="text" data-bind="value: active.name"/><br/>
+			Url:<input id="url" type="text" data-bind="value: active.url" /><br/>
 			<input type="button" value="New" />
 			<input type="submit" value="Update" />
 			<input type="button" value="Delete" />
@@ -64,9 +73,15 @@
 				<thead>
 					<tr>
 						<th>id</th>
-						<th>url</th>
+						<th>Name</th>
 					</tr>
 				</thead>
+				<tbody data-bind="foreach: elements">
+					<tr>
+						<td><a data-bind="attr : { href : prepUrl }, text: id"></a></td>
+						<td><a data-bind="attr: { href: url}, text: name"></a></td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</body>

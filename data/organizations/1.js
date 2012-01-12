@@ -1,1 +1,1 @@
-{"id":1,"name":"Twitter","url":"http://twitter.com"},
+{"id":1,"name":"Twitter","url":"http://twitter.com"}

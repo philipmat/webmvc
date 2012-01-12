@@ -16,23 +16,19 @@ window['organizations'] = (function() {
 	};
 	me.loadModel = function (fromJson) {
 		var model = this.makeModel(fromJson);
-		this.ViewModel.active(self);
+		this.ViewModel.active(model);
 	};
 	me.loadViewModel = function(fromJson) {
-		console.log(this);
 		fromJson.all.forEach(function(o) {
 			var m = this.makeModel(o);
 			this.ViewModel.elements.push(m);
 		}, this);
-		console.log(fromJson);
-		console.log(this.ViewModel);
 	};
 	me.testBind = function() {
 		var j0 = { id : 100, name : 'Moof', url : 'about:blank' },
 			j1 = { id : 101, name : 'Spoof', url : 'about:blank' };
 		var k = { all : [ j0, j1] };
 		this.loadViewModel(k);
-		console.log(this.ViewModel);
 	};
 	return me;
 })();

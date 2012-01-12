@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+		<script type='text/javascript' src='knockout-2.0.0.debug.js'></script>
+		<script type='text/javascript' src='underscore.js'></script>
+		<script type='text/javascript'>
+			function getQS(uri) {
+				return uri.substr(1);
+			}
+
+			function getParts(uri) {
+				var parts = getQS(uri).split('/');
+				parts = _(parts).filter(function (it) { return it !== ''; });
+				var ns = _.first(parts),
+					id = _.first(_.rest(parts));
+				return { ns : ns, id : id };
+			}
+
+			function includeHelper(ns) {
+				$('head').append( $('<script/>', {
+					src : ns + '/kn-helper.js',
+					type : 'text/javascript'}));
+			}
+
+			function setup(uri) {
+				var parts = getParts(uri);
+				var ns = parts.ns, id = parts.id;
+				includeHelper(ns);
+				if (ns !== undefined) {
+					$.getJSON('../data/' + ns + '/all.js', function(data) {
+						// alert(data);
+					});
+				}
+				if (id !== undefined) {
+					$.getJSON('../data/' + ns + '/' + id + '.js', function(data) {
+						var om = window[ns]['Model'](data);
+						// bind(om);
+					});
+				}
+			}
+
+			function testBind() {
+				var parts = getParts(window.location.search);
+				window[parts.ns].testBind();
+			}
+
+
+			$(document).ready(setup(window.location.search));
+		</script>
+	</head>
+	<body>
+		<a href="index.html">Back</a>	
+		<a href="javascript:testBind()">Bind</a>
+		<div class="single">
+			Id : <span data-bind="text: id"></span><br/>
+			Name:<input id="name" type="text" data-bind="value: name"/><br/>
+			Url:<input id="url" type="text" data-bind="value: url" /><br/>
+			<input type="button" value="New" />
+			<input type="submit" value="Update" />
+			<input type="button" value="Delete" />
+		</div>
+		<div class="multi">
+			<table>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>url</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</body>
+</html>
+

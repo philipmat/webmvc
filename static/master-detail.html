@@ -41,7 +41,7 @@
 								ko.applyBindings(window[ns].ViewModel);
 							});
 						} else {
-							//ko.applyBindings(window[ns].ViewModel);
+							ko.applyBindings(window[ns].ViewModel);
 						}
 
 					});
@@ -60,10 +60,10 @@
 	<body>
 		<a href="index.html">Back</a>	
 		<a href="javascript:testBind()">Bind</a>
-		<div class="single">
-			Id : <span data-bind="text: active().id"></span><br/>
-			Name:<input id="name" type="text" data-bind="value: active().name"/><br/>
-			Url:<input id="url" type="text" data-bind="value: active().url" /><br/>
+		<div class="single" data-bind="with: active">
+			Id : <span data-bind="text: id"></span><br/>
+			Name:<input id="name" type="text" data-bind="value: name"/><br/>
+			Url:<input id="url" type="text" data-bind="value: url" /><br/>
 			<input type="button" value="New" />
 			<input type="submit" value="Update" />
 			<input type="button" value="Delete" />

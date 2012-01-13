@@ -9,9 +9,9 @@ window['people'] = {
 			var active = this.active();
 			var json = ko.toJSON(active);
 			if (active.id == -1) {
-				alert("POST /data/people/ with:\n" + json);
+				alert("POST " + window.CONFIG.dataUrl('people') + " with:\n" + json);
 			} else {
-				alert("PUT /data/people/" + active.id + " with:\n" + json);
+				alert("PUT " + window.CONFIG.dataUrl('people', active.id) + " with:\n" + json);
 			}
 			if (active.id == -1) {
 				// send it to the server as new.
@@ -21,7 +21,7 @@ window['people'] = {
 		},
 		remove : function(elem) {
 			var active = this.active(), json = ko.toJSON(active);
-			alert('DELETE /data/people/' + active.id);
+			alert('DELETE ' + window.CONFIG.dataUrl('people' + active.id));
 			// this.elements.remove(active);
 		},
 		makeFrom : function (fromJson) {
@@ -32,14 +32,13 @@ window['people'] = {
 			model.hot = ko.observable(fromJson.hot);
 			model.hotness = ko.computed(function() {
 				var k = model.hot();
-				console.log(model);
 				if (k >= 10) return 'VERY!';
 				if (k >= 8) return 'Yes';
 				if (k >= 6) return 'Meh.';
 				return 'No.';
 			});
 			model.prepUrl = ko.computed(function() {
-				return '?/people/' + model.id;
+				return '?people/' + model.id;
 			});
 			return model;
 		},

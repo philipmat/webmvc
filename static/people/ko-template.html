@@ -2,7 +2,10 @@
 Id : <span data-bind="text: id"></span><br/>
 Name: <input id="name" type="text" data-bind="value: name"/><br/>
 Height: <input id="height" type="text" data-bind="value: height" /><br/>
-Hot (1-10): <input id="hot" type="text" data-bind="value: hot" /><br/>
+Hot (1-10): <input id="hot" type="text" data-bind="value: hot" /> 
+	(<span data-bind="text: hotness"></span>)<br/>
+
+
 </script>
 <script id="template-multi" type="text/html">
 <table>

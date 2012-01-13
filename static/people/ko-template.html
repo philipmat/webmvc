@@ -1,0 +1,27 @@
+<script id="template-single" type="text/html">
+Id : <span data-bind="text: id"></span><br/>
+Name: <input id="name" type="text" data-bind="value: name"/><br/>
+Height: <input id="height" type="text" data-bind="value: height" /><br/>
+Hot (1-10): <input id="hot" type="text" data-bind="value: hot" /><br/>
+</script>
+<script id="template-multi" type="text/html">
+<table>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+			<th>Height</th>
+			<th>Hotness</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: elements">
+		<tr>
+			<td><a data-bind="attr : { href : prepUrl }, text: id"></a></td>
+			<td data-bind='text: name'></td>
+			<td data-bind='text: height'></td>
+			<td data-bind='text: hotness'></td>
+		</tr>
+	</tbody>
+</table>
+</script>
+

@@ -1,0 +1,22 @@
+<script id="template-single" type="text/html">
+Id : <span data-bind="text: id"></span><br/>
+Name: <input id="name" type="text" data-bind="value: name"/><br/>
+Url: <input id="url" type="text" data-bind="value: url" /><br/>
+</script>
+<script id="template-multi" type="text/html">
+<table>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: elements">
+		<tr>
+			<td><a data-bind="attr : { href : prepUrl }, text: id"></a></td>
+			<td><a data-bind="attr: { href: url}, text: name"></a></td>
+		</tr>
+	</tbody>
+</table>
+</script>
+

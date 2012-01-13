@@ -21,13 +21,14 @@
 		<!-- if using individual chunks: -->
 		<!--<div id="single" data-bind="with : active"></div>-->
 		<!-- if using KO templates --> 
-		<div id="single" data-bind="template : {name : 'template-single', data : active }">
+		<div id="single" data-bind="if: active">
+			<div data-bind="template : {name : 'template-single', data : active }"></div>
 		</div>
 
 		<div id="buttons">
-			<input type="button" value="New" />
-			<input type="submit" value="Update" />
-			<input type="button" value="Delete" />
+			<input type="button" value="New" data-bind="click: add" />
+			<input type="submit" value="Update" data-bind="click: update" />
+			<input type="button" value="Delete" data-bind="click: remove" />
 		</div>
 
 		<!-- if using individual chunks: -->

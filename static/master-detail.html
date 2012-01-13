@@ -10,36 +10,22 @@
 				window[parts.ns].testBind();
 			}
 
-
 			$(document).ready(setup(window.location.search));
+		</script>
+		<script id="templates" type="text/html">
 		</script>
 	</head>
 	<body>
 		<a href="index.html">Back</a>	
-		<a href="javascript:testBind()">Bind</a>
-		<div class="single" data-bind="with: active">
-			Id : <span data-bind="text: id"></span><br/>
-			Name: <input id="name" type="text" data-bind="value: name"/><br/>
-			Url: <input id="url" type="text" data-bind="value: url" /><br/>
+		<!--<a href="javascript:testBind()">Bind</a>-->
+		<div id="single" data-bind="with: active">
+		</div>
+		<div id="buttons">
 			<input type="button" value="New" />
 			<input type="submit" value="Update" />
 			<input type="button" value="Delete" />
 		</div>
-		<div class="multi">
-			<table>
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>Name</th>
-					</tr>
-				</thead>
-				<tbody data-bind="foreach: elements">
-					<tr>
-						<td><a data-bind="attr : { href : prepUrl }, text: id"></a></td>
-						<td><a data-bind="attr: { href: url}, text: name"></a></td>
-					</tr>
-				</tbody>
-			</table>
+		<div id="multi">
 		</div>
 	</body>
 </html>

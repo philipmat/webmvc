@@ -31,6 +31,16 @@ function getTemplates(ns, callback) {
 	}
 }
 
+function getKOTemplates(ns, callback) {
+	if (ns !== undefined) {
+		var url = ns + '/ko-template.html';
+		$.get(url, function(data) {
+			$('#templates').append(data);
+			callback();
+		});
+	}
+}
+
 function getData(ns, id, callback) {
 	if (ns !== undefined) {
 		var all_uri = '../data/' + ns + '/all.js';
@@ -58,7 +68,10 @@ function setup(uri) {
 	console.log(parts);
 	var ns = parts.ns, id = parts.id;
 	includeHelper(ns);
-	getTemplates(ns, function() {
+	// if using individual chunks:
+	//getTemplates(ns, function() {
+	// if using KO templates
+	getKOTemplates(ns, function() {
 		getData(ns, id);
 	});
 }

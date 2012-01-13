@@ -18,14 +18,22 @@
 	<body>
 		<a href="index.html">Back</a>	
 		<!--<a href="javascript:testBind()">Bind</a>-->
-		<div id="single" data-bind="with: active">
+		<!-- if using individual chunks: -->
+		<!--<div id="single" data-bind="with : active"></div>-->
+		<!-- if using KO templates --> 
+		<div id="single" data-bind="template : {name : 'template-single', data : active }">
 		</div>
+
 		<div id="buttons">
 			<input type="button" value="New" />
 			<input type="submit" value="Update" />
 			<input type="button" value="Delete" />
 		</div>
-		<div id="multi">
+
+		<!-- if using individual chunks: -->
+		<!--<div id="multi">-->
+		<!-- if using KO templates --> 
+		<div id="multi" data-bind="template: { name : 'template-multi' }">
 		</div>
 	</body>
 </html>
